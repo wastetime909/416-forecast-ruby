@@ -1,0 +1,23 @@
+
+<div class="container table-responsive mt-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <% @charges.each do |date, _charge| %>
+                    <th><%= date.strftime("%-m/%-d/%-y") %></th>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <% @charges.each do |_date, charge| %>
+                    <td><%= charge %></td>
+                <% end %>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div data-controller="chart" data-chart-charges-value="<%= @charges.to_json %>">
+    <canvas></canvas>
+</div>
