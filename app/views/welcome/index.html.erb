@@ -3,6 +3,9 @@
     <table class="table">
         <thead>
             <tr>
+                <% @forecast.each do |date, _charge| %>
+                    <th class="bg-danger-subtle"><%= date.strftime("%-m/%-d/%-y") %></th>
+                <% end %>
                 <% @charges.each do |date, _charge| %>
                     <th><%= date.strftime("%-m/%-d/%-y") %></th>
                 <% end %>
@@ -10,6 +13,9 @@
         </thead>
         <tbody>
             <tr>
+                <% @forecast.each do |_date, charge| %>
+                    <td class="bg-danger-subtle"><%= charge.round(1) %></td>
+                <% end %>
                 <% @charges.each do |_date, charge| %>
                     <td><%= charge %></td>
                 <% end %>
@@ -18,6 +24,9 @@
     </table>
 </div>
 
-<div data-controller="chart" data-chart-charges-value="<%= @charges.to_json %>">
+<div data-controller="chart" 
+data-chart-charges-value="<%= @charges.to_json %>"
+data-chart-forecast-value="<%= @forecast.to_json %>"
+>
     <canvas></canvas>
 </div>
